@@ -87,7 +87,7 @@ import Page3.Page3_Main;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 import static android.content.Intent.FLAG_ACTIVITY_NO_ANIMATION;
 
-public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  SharedPreferences.OnSharedPreferenceChangeListener{
+public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  SharedPreferences.OnSharedPreferenceChangeListener {
 
     int station_code = 999;
     String[] arr_line = null;
@@ -127,6 +127,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
     private Context context;
 
     //기기의 높이를 구한다.
@@ -134,11 +135,11 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
     int height;
 
     Page2 mainActivity;
-    private String  subject, station, id;
+    private String subject, station, id;
     private String contentTypeId, cat1, cat2;
 
     // 찜한 여행지 저장하는 리스트
-    private ArrayList<String > mySpot = new ArrayList<String >();
+    private ArrayList<String> mySpot = new ArrayList<String>();
 
     //역 이름을 받아서 지역코드랑 시군구코드 받기 위한 배열
     String returnResult, url;
@@ -162,7 +163,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
     TextView noCourse, noCourse2;
 
-    Button all_cat_btn, schedulePlus_btn,schedulePlus_btn2;
+    Button all_cat_btn, schedulePlus_btn, schedulePlus_btn2;
 
     //page2 코스 더보기
     TextView courseMore;
@@ -210,6 +211,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             mService = binder.getService();
             mBound = true;
         }
+
         @Override
         public void onServiceDisconnected(ComponentName name) {
             mService = null;
@@ -220,7 +222,6 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
     //등록한 일정 관련
     private Second_MainDBHelper second_mainDBHelper;
     private String second_key = "";
-
 
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
@@ -234,7 +235,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         Display display = getWindowManager().getDefaultDisplay();  // in Activity
         Point size = new Point();
         display.getRealSize(size);
-        height = size.y - (int)(100 * d);
+        height = size.y - (int) (100 * d);
 
         mDbOpenHelper = new DbOpenHelper(Page2.this);
         mDbOpenHelper.open();
@@ -251,19 +252,19 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         context = getApplicationContext();
         toolbar2 = findViewById(R.id.toolbar);
         drawer = findViewById(R.id.drawer_layout);
-        userImg = (ImageView)findViewById(R.id.menu_userImage);
-        userText1 = (TextView)findViewById(R.id.menu_text1);
-        userText2 = (TextView)findViewById(R.id.menu_text2);
-        positionBtn = (Switch)findViewById(R.id.menu_postion_btn);
-        alramBtn = (Switch)findViewById(R.id.menu_alram_btn);
-        recyclerView1 = (RecyclerView)findViewById(R.id.menu_recyclerview1);
+        userImg = (ImageView) findViewById(R.id.menu_userImage);
+        userText1 = (TextView) findViewById(R.id.menu_text1);
+        userText2 = (TextView) findViewById(R.id.menu_text2);
+        positionBtn = (Switch) findViewById(R.id.menu_postion_btn);
+        alramBtn = (Switch) findViewById(R.id.menu_alram_btn);
+        recyclerView1 = (RecyclerView) findViewById(R.id.menu_recyclerview1);
         loading_progress = findViewById(R.id.page2_progress);
         info_message = findViewById(R.id.info_message1);
         info_dismiss_btn = findViewById(R.id.info_dismiss_btn);
-        menu_img = (ImageView)findViewById(R.id.menu_userImage);
+        menu_img = (ImageView) findViewById(R.id.menu_userImage);
         menu_text1 = (TextView) findViewById(R.id.menu_text1);
         menu_text2 = (TextView) findViewById(R.id.menu_text2);
-        edit_nickname = (ImageButton)findViewById(R.id.menu_edit_btn);
+        edit_nickname = (ImageButton) findViewById(R.id.menu_edit_btn);
 
         //최소 실행 때 보이는 안내창
         SharedPreferences a = getSharedPreferences("info1", MODE_PRIVATE);
@@ -278,7 +279,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         }, 300);
 
         //첫 실행시 나오는 안내 말풍선
-        SharedPreferences preferences =getSharedPreferences("info1", MODE_PRIVATE);
+        SharedPreferences preferences = getSharedPreferences("info1", MODE_PRIVATE);
         int firstviewShow = preferences.getInt("info1", 0);
 
         // 1이 아니라면 취향파악페이지 보여주기 = 처음 실행이라면
@@ -322,20 +323,18 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         });
 
 
-
-
         //알림 스위치 버튼
         setButtonsState_notity();
         alramBtn.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if(isChecked){
+                if (isChecked) {
                     menu_dbOpenHelper.open();
                     menu_dbOpenHelper.deleteAllColumns();
                     menu_dbOpenHelper.insertColumn("true", "0");
                     //  menu_dbOpenHelper.close();
 
-                }else {
+                } else {
                     menu_dbOpenHelper.open();
                     menu_dbOpenHelper.deleteAllColumns();
                     menu_dbOpenHelper.insertColumn("false", "0");
@@ -344,14 +343,17 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             }
         });
 
-        mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
+        mDrawerToggle = new EndDrawerToggle(this, drawer, toolbar2, R.string.open_drawer, R.string.close_drawer) {
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
+
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -360,7 +362,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
         //등록된 일정이 있는지 검사
         Cursor iCursor = second_mainDBHelper.selectColumns();
-        while (iCursor.moveToNext()){
+        while (iCursor.moveToNext()) {
             String Key = iCursor.getString(iCursor.getColumnIndex("userid"));
             second_key = Key;
         }
@@ -391,11 +393,11 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         courseBox1 = (LinearLayout) findViewById(R.id.page2_course_1);
         courseBox2 = (LinearLayout) findViewById(R.id.page2_course_2);
         subject_title = (TextView) findViewById(R.id.page2_cat);
-        spot_error_txt = (TextView)findViewById(R.id.spot_error_txt2);
-        noCourse = (TextView)findViewById(R.id.page2_noCourse);
-        noCourse2 = (TextView)findViewById(R.id.page2_noCourse2);
+        spot_error_txt = (TextView) findViewById(R.id.spot_error_txt2);
+        noCourse = (TextView) findViewById(R.id.page2_noCourse);
+        noCourse2 = (TextView) findViewById(R.id.page2_noCourse2);
         courseMore = (TextView) findViewById(R.id.page2_courseMore);
-        appBarLayout = (AppBarLayout)findViewById(R.id.app_bar);
+        appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
         logo = (ImageButton) findViewById(R.id.main_logo);
         logo.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -404,7 +406,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
                 intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
                 intent.putExtra("Logo", "1");
                 startActivity(intent);
-                overridePendingTransition(0,0);
+                overridePendingTransition(0, 0);
             }
         });
 
@@ -416,12 +418,11 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
                 Intent intent = new Intent(getApplicationContext(), Page0_9_PopUp.class);
                 intent.putExtra("서브이름", sub);
                 intent.putExtra("닉네임", nickName);
-                intent.putExtra("Page9",score);
+                intent.putExtra("Page9", score);
                 intent.addFlags(intent.FLAG_ACTIVITY_NO_ANIMATION);
                 startActivityForResult(intent, 1);
             }
         });
-
 
 
         //위아래로 드래그 했을 때 변화를 감지하는 부분
@@ -429,7 +430,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             @Override
             public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
                 if (Math.abs(verticalOffset) == appBarLayout.getTotalScrollRange()) {
-                    if(isExpand){
+                    if (isExpand) {
                         changeVisibility(false, height);
                         isExpand = false;
                     }
@@ -440,7 +441,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
         //세로 드래그 문제를 해결하기 위한 부분
         if (appBarLayout.getLayoutParams() != null) {
-            CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams)appBarLayout.getLayoutParams();
+            CoordinatorLayout.LayoutParams layoutParams = (CoordinatorLayout.LayoutParams) appBarLayout.getLayoutParams();
             AppBarLayout.Behavior appBarLayoutBehaviour = new AppBarLayout.Behavior();
             appBarLayoutBehaviour.setDragCallback(new AppBarLayout.Behavior.DragCallback() {
                 @Override
@@ -453,7 +454,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
 
         //텍스트뷰 밑줄
-        courseMore.setPaintFlags(courseMore.getPaintFlags()| Paint.UNDERLINE_TEXT_FLAG);
+        courseMore.setPaintFlags(courseMore.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);
 
         // 카테고리 전체 보기
         all_cat_btn = (Button) findViewById(R.id.page2_cat_btn);
@@ -473,7 +474,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         schedulePlus_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList <String> page2_course = new ArrayList<>();
+                ArrayList<String> page2_course = new ArrayList<>();
                 page2_course.add(t1.getText().toString());
                 page2_course.add(t2.getText().toString());
                 page2_course.add(t3.getText().toString());
@@ -489,7 +490,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         schedulePlus_btn2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                ArrayList <String> page2_course2 = new ArrayList<>();
+                ArrayList<String> page2_course2 = new ArrayList<>();
                 page2_course2.add(t5.getText().toString());
                 page2_course2.add(t6.getText().toString());
                 page2_course2.add(t7.getText().toString());
@@ -511,10 +512,9 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             //인터넷 유무 체크
             int isNetworkConnect = NetworkStatus.getConnectivityStatus(getApplicationContext());
 
-            if(isNetworkConnect == 3) {
+            if (isNetworkConnect == 3) {
                 spot_error_txt.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 url_code();
                 settingList();
                 settingAPI_Data();
@@ -526,10 +526,9 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             subject = intent.getStringExtra("subject_name_from_Page2_1");
             int isNetworkConnect = NetworkStatus.getConnectivityStatus(getApplicationContext());
 
-            if(isNetworkConnect == 3) {
+            if (isNetworkConnect == 3) {
                 spot_error_txt.setVisibility(View.VISIBLE);
-            }
-            else {
+            } else {
                 url_code();
                 settingList();
                 settingAPI_Data();
@@ -621,28 +620,28 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
 
         //more loading
-        final NestedScrollView nestedScrollView = (NestedScrollView)findViewById(R.id.nestScrollView2);
+        final NestedScrollView nestedScrollView = (NestedScrollView) findViewById(R.id.nestScrollView2);
         nestedScrollView.setOnScrollChangeListener(new NestedScrollView.OnScrollChangeListener() {
-            int  visibleItemCount,  totalItemCount, pastVisiblesItems;
+            int visibleItemCount, totalItemCount, pastVisiblesItems;
 
             @Override
             public void onScrollChange(NestedScrollView v, int scrollX, int scrollY, int oldScrollX, int oldScrollY) {
 
-                if(v.getChildAt(v.getChildCount() -1) != null) {
-                    if( (scrollY >= (v.getChildAt(v.getChildCount() -1).getMeasuredHeight() -  v.getMeasuredHeight() )) && scrollY > oldScrollY) {
+                if (v.getChildAt(v.getChildCount() - 1) != null) {
+                    if ((scrollY >= (v.getChildAt(v.getChildCount() - 1).getMeasuredHeight() - v.getMeasuredHeight())) && scrollY > oldScrollY) {
 
                         visibleItemCount = gridLayoutManager.getChildCount();
-                        totalItemCount = gridLayoutManager.getItemCount() ;
+                        totalItemCount = gridLayoutManager.getItemCount();
                         pastVisiblesItems = gridLayoutManager.findFirstVisibleItemPosition();
 
                         //받아온 api 개수가 20개가 안되면 다음 페이지가 없다고 판단. false로 바꿔줌
-                        if(tourList.size() < 10){
+                        if (tourList.size() < 10) {
                             isLoadData = false;
                         }
 
                         //isLoadData가 true이면
-                        if(isLoadData) {
-                            if( (visibleItemCount + pastVisiblesItems) >= totalItemCount ){
+                        if (isLoadData) {
+                            if ((visibleItemCount + pastVisiblesItems) >= totalItemCount) {
 
                                 page++;
 
@@ -665,19 +664,20 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         });
 
 
-
     }
 
     //txt 돌려 역 비교할 배열 만들기(이름 지역코드 동네코드)<-로 구성
-    private void settingList(){
+    private void settingList() {
         String readStr = "";
         AssetManager assetManager = getResources().getAssets();
         InputStream inputStream = null;
-        try{
+        try {
             inputStream = assetManager.open("station_code.txt");
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String str = null;
-            while (((str = reader.readLine()) != null)){ readStr += str + "\n";}
+            while (((str = reader.readLine()) != null)) {
+                readStr += str + "\n";
+            }
             reader.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -685,7 +685,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         String[] arr_all = readStr.split("\n"); //txt 내용을 줄바꿈 기준으로 나눈다.
 
         //한 줄의 값을 띄어쓰기 기준으로 나눠서, 역명/지역코드/시군구코드 배열에 넣는다.
-        for(int i=0; i <arr_all.length; i++) {
+        for (int i = 0; i < arr_all.length; i++) {
             arr_line = arr_all[i].split(" ");
 
             _name[i] = arr_line[0];         //서울
@@ -697,9 +697,9 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         }
     }
 
-    private String compareStation(String area, String sigunguCode){
-        for(int p = 0; p < 234;p ++){
-            if(_sigunguCode[p].trim().equals(sigunguCode.trim()) && _areaCode[p].trim().equals(area.trim())){
+    private String compareStation(String area, String sigunguCode) {
+        for (int p = 0; p < 234; p++) {
+            if (_sigunguCode[p].trim().equals(sigunguCode.trim()) && _areaCode[p].trim().equals(area.trim())) {
                 cityName = _name[p];
             }
         }
@@ -710,7 +710,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         SearchTask task = new SearchTask();
 
         String areacode = null;
-        String contentid= null;
+        String contentid = null;
         String img_Url = null;
         String sigungucode_arr = null;
         String name = null;
@@ -728,7 +728,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             JSONObject items = body.getJSONObject("items");
             JSONArray item = items.getJSONArray("item");
 
-            for(int i = 0; i < item.length(); i++) {
+            for (int i = 0; i < item.length(); i++) {
                 JSONObject jObject = item.getJSONObject(i);
                 areacode = jObject.getString("areacode");
                 contentid = jObject.getString("contentid");
@@ -783,7 +783,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         va.start();
     }
 
-    private void getData () {
+    private void getData() {
         switch (subject) {
             case "자연":
                 st1 = new String[]{"양평", "여수", "제천"};
@@ -810,10 +810,10 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
                 st4 = new String[]{"순천", "논산", "보성"};
                 break;
             case "산업":
-                st1 = new String[]{"용산","김제"};
-                st2 = new String[]{"대전","광양"};
-                st3 = new String[]{"대구","창원"};
-                st4 = new String[]{"포항","부전"};
+                st1 = new String[]{"용산", "김제"};
+                st2 = new String[]{"대전", "광양"};
+                st3 = new String[]{"대구", "창원"};
+                st4 = new String[]{"포항", "부전"};
                 break;
             case "건축/조형":
                 st1 = new String[]{"서울", "용산"};
@@ -919,10 +919,10 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         }
     }
 
-    public void showDatabase(){
+    public void showDatabase() {
         Cursor iCursor = mDbOpenHelper.selectColumns();
         mySpot.clear();
-        while(iCursor.moveToNext()){
+        while (iCursor.moveToNext()) {
             String tempName = iCursor.getString(iCursor.getColumnIndex("name"));
             mySpot.add(tempName);
         }
@@ -935,7 +935,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
     @Override
     public void make_db(String countId, String name, String cityname, String type, String image, String click, String areaCode, String sigunguCode) {
         cityname = compareStation(areaCode, sigunguCode);
-        if(cityname == null){
+        if (cityname == null) {
             cityname = "기타";
         }
         mDbOpenHelper.open();
@@ -954,7 +954,6 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         mDbOpenHelper.close();
         return id;
     }
-
 
 
     @Override
@@ -1033,11 +1032,11 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             try {
                 url = new URL("https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "tQVUU9RPcLsBmX4nqBFMUDqgvO3nBdfcZI%2FS8GQndON35%2BjzjShtdnH94CNN6d%2Fhb61uX1mOz7lWWD5rA6LNFg%3D%3D" +
-                        "&pageNo=" + page+
+                        "&pageNo=" + page +
                         "&numOfRows=10&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                         "&contentTypeId=" + contentTypeId +
                         "&sigunguCode=" +
-                        "&areaCode="+
+                        "&areaCode=" +
                         "&cat1=" + cat1 + "&cat2=" + cat2 + "&cat3=" +
                         "&listYN=Y" +
                         "&_type=json");
@@ -1086,7 +1085,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
         // DB에 값이 있다면
         if (like != null) {
             mScore = like.split(" ");
-            for (int i = 0 ; i < mScore.length ; i++) {
+            for (int i = 0; i < mScore.length; i++) {
                 score[i] = Integer.parseInt(mScore[i]); // Int로 캐스팅
             }
 
@@ -1101,7 +1100,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             if (score[2] != score[3]) {
                 if (score[6] == 0) {
                     menu_img.setBackgroundResource(R.drawable.ic_otter);
-                } else if (score[2] == 1 ) {
+                } else if (score[2] == 1) {
                     menu_img.setBackgroundResource(R.drawable.ic_soul);
                 } else if (score[2] == 0) {
                     menu_img.setBackgroundResource(R.drawable.ic_excel);
@@ -1111,13 +1110,12 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             if (score[1] == 0) {
                 if (score[4] == 0 && score[5] == 1) {
                     menu_img.setBackgroundResource(R.drawable.ic_sprout);
-                }
-                else if (score[4] == 1&&score[5] == 0) {
+                } else if (score[4] == 1 && score[5] == 0) {
                     menu_img.setBackgroundResource(R.drawable.ic_chick);
                 }
             }
 
-            if (score[1] == 4&&score[5] == 0) {
+            if (score[1] == 4 && score[5] == 0) {
                 menu_img.setBackgroundResource(R.drawable.ic_chick);
             }
         }
@@ -1138,8 +1136,12 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0,0);
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else{
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+         }
     }
 
     public void notity_listner(String sort){

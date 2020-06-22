@@ -127,7 +127,6 @@ public class Page2_X_Adapter extends RecyclerView.Adapter<Page2_X_Adapter.ViewHo
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 if (view.getId() == R.id.page2_x_linearitem) {
                     Intent intent = new Intent(context, Page2_1_X.class);
                     intent.putExtra("title", item.getTitle());

@@ -96,6 +96,7 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
 
     private Menu_DbOpenHelper menu_dbOpenHelper;
     private List<String> onoff = new ArrayList<>();
@@ -154,7 +155,7 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
 
 
-// 취향파악 DB열기
+        // 취향파악 DB열기
         mLikeDpOpenHelper = new Like_DbOpenHelper(this);
         mLikeDpOpenHelper.open();
         mLikeDpOpenHelper.create();
@@ -180,7 +181,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-
                 } else {
                     mService.removeLocationUpdates();
                 }
@@ -199,13 +199,10 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
                     menu_dbOpenHelper.open();
                     menu_dbOpenHelper.deleteAllColumns();
                     menu_dbOpenHelper.insertColumn("true", "0");
-                    //  menu_dbOpenHelper.close();
-
                 }else {
                     menu_dbOpenHelper.open();
                     menu_dbOpenHelper.deleteAllColumns();
                     menu_dbOpenHelper.insertColumn("false", "0");
-                    //  menu_dbOpenHelper.close();
                 }
             }
         });
@@ -216,10 +213,12 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -286,12 +285,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
         });
 
 
-
-
-
-        // 리사이클러뷰 헤더
-        //name.add("나의 관광지");
-
         // 헤더에 도시 이름 넣기
         for (int i = 0 ; i < cityList.size() ; i++) {
             name.add(cityList.get(i));
@@ -342,8 +335,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
     public void showDatabase(String sort){
         Cursor iCursor = mDbOpenHelper.sortColumn(sort);
-        //iCursor.moveToFirst();
-        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
         String result;
         mySpot.clear();
         myType.clear();
@@ -365,17 +356,19 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
         while (iCursorCityName.moveToNext()) {
             String tempCityName = iCursorCityName.getString(iCursorCityName.getColumnIndex("cityname"));
-
             cityList.add(tempCityName);
-            Log.i("갯수", String.valueOf(cityList.size()));
         }
     }
 
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0,0);
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+        }
     }
 
     public void notity_listner(String sort){
@@ -383,7 +376,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
         while(iCursor.moveToNext()){
             String  id = iCursor.getString(iCursor.getColumnIndex("userid"));
-            Log.i("갑자기 왜 안돼", String.valueOf(iCursor.getCount()) + "/" + id);
             onoff.add(id);
         }
 
@@ -480,7 +472,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
     public void showLikeDB() {
         Cursor likeCursor = mLikeDpOpenHelper.selectColumns();
-        Log.d("showLikeDB", "DB Size : " + likeCursor.getCount());
 
         while (likeCursor.moveToNext()) {
             String tempLike = likeCursor.getString(likeCursor.getColumnIndex("userid"));
@@ -489,7 +480,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
             like = tempLike;
             nickName = tempNickname;
             sub = tempSub;
-            Log.d("nickkkk",nickName);
         }
 
         menu_text1.setText(sub);
@@ -497,13 +487,9 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
 
         // DB에 값이 있다면
         if (like != null) {
-            // mScore에 일단 값을 쪼개서 저장하고
             mScore = like.split(" ");
-//            Log.i("mScore", like);
             for (int i = 0 ; i < mScore.length ; i++) {
-//                Log.i("mScore", mScore[i]);
                 score[i] = Integer.parseInt(mScore[i]); // Int로 캐스팅
-//                Log.i("score", String.valueOf(score[i]));
             }
 
             if (score[2] == 0 && score[3] == 0) {
@@ -518,11 +504,9 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
                 if (score[6] == 0) {
                     menu_img.setBackgroundResource(R.drawable.ic_otter);
                 } else if (score[2] == 1 ) {
-
                     menu_img.setBackgroundResource(R.drawable.ic_soul);
 
                 } else if (score[2] == 0) {
-
                     menu_img.setBackgroundResource(R.drawable.ic_excel);
 
                 }
@@ -534,7 +518,6 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
                 }
                 else if (score[4] == 1&&score[5] == 0) {
                     menu_img.setBackgroundResource(R.drawable.ic_chick);
-
                 }
             }
 
@@ -550,11 +533,8 @@ public class Page1_1_1 extends AppCompatActivity implements SharedPreferences.On
         if (requestCode == 1) {
             if (resultCode == RESULT_OK) {
                 String result = data.getStringExtra("result");
-                //String result2 = data.getStringExtra("result2");
                 menu_text2.setText(result);
                 nickName = result;
-                //db_nickName = nickName;
-
             }
         }
     }

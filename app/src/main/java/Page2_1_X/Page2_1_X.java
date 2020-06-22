@@ -106,15 +106,12 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_page2_1_x);
 
-        // 이거 선언해야 DB들어감,,,,, 개뻘짓거리했슴,, 8ㅅ8
         mCallBack = Page2_1_X.this;
 
         title = (TextView)findViewById(R.id.page2_1_x_title);
-
         scrollView = (ScrollView)findViewById(R.id.page2_1_x_scrollView);
         scrollView.smoothScrollBy(0,0);
         mapViewContainer = (ViewGroup) findViewById(R.id.map_view);
-
         back_btn = (ImageView) findViewById(R.id.page2_1_x_back_btn);
 
         //데이터베이스 관련
@@ -156,13 +153,9 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         sigunguCode = intent.getStringExtra("sigunguCode");
 
         settingList();
-
-
         url_code();
 
         title.setText(spot_title);
-
-        Log.i("왜?ㅋ", contentID+spot_title+type);
 
         // 버튼 눌림효과
         add_btn = (Button) findViewById(R.id.page2_1_1_like);
@@ -187,12 +180,9 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                     buttonState = false;
                     add_btn.setBackgroundResource(R.drawable.ic_icon_add_float_1);
                     mCallBack.delete_db(contentID);
-                    //Toast.makeText(getApplicationContext(),"관심관광지를 취소했습니다",Toast.LENGTH_SHORT).show();
                 } else {
                     // 버튼 처음 누를 때
-                    // 버튼 처음 누를 때
                     if(cityName.equals("cityname")){
-                        Log.i("뭐냐;;", areaCode+"/"+sigunguCode+"/"+cityName);
                         cityName = compareStation(areaCode, sigunguCode);
                         if( cityName == null){
                             cityName = "기타";
@@ -205,7 +195,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                     add_btn.setBackgroundResource(R.drawable.ic_icon_add_float_2);
                     mCallBack.make_db(contentID, spot_title, cityName, type, image, "1");   //countId랑 title을 db에 넣으려고 함( make_db라는 인터페이스 이용)
                     mCallBack.make_dialog();                                       //db에 잘 넣으면 띄우는 다이얼로그(위와 마찬가지로 인터페이스 이용
-                    //Toast.makeText(getApplicationContext(),"관심관광지를 추가했습니다",Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -214,12 +203,10 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         mapView = new MapView(this);
         RelativeLayout mapViewContainer = (RelativeLayout)findViewById(R.id.page2_1_1_map);
         mapViewContainer.addView(mapView,0);
-//        mapView.setClickable(true);
         marker = new MapPOIItem();
 
         settingAPI_Data();
 
-        Log.i("경도 위도", x+"  " + y);
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(y, x), 2, true);
 
         if (detailImage != null) {
@@ -233,7 +220,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
             }
 
             for (int i = 0 ; i < detailImage.length ; i++) {
-                Log.i("보내지나요?", detailImage[i]);
             }
             page2_1_1_fragmentAdapter.notifyDataSetChanged();
         }
@@ -279,7 +265,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         // 공통정보 값
         try {
             String RESULT = task.execute().get();
-            Log.i("전달 받은 값", RESULT);
 
             if (RESULT.length() != 0) {
 
@@ -298,20 +283,13 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                     mapy = name_1[2];
                     tel = name_1[3];
                     name = name_1[4];
-                    Log.i("y: ", mapy);
                 } else {
                     addr = name_1[0];
                     mapx = name_1[1];
                     mapy = name_1[2];
                     name = name_1[3];
                     tel = null;
-                    Log.i("y: ", mapy);
                 }
-
-                Log.i("주소: ", addr);
-                Log.i("x: ", mapx);
-                Log.i("y: ", mapy);
-                Log.i("이름: ", name);
 
                 // 값이 있을 경우에 넣어주기
                 if (tel != null) {
@@ -340,7 +318,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         // 소개 정보 값
         try {
             String RESULT = task2.execute().get();
-            Log.i("소개정보 전달 받은 값", RESULT);
 
             if (RESULT.length() != 0) {
                 // 묶인 값 분류하기
@@ -369,7 +346,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                 }
 
 //                // 스트링 비교할땐ㄴ equals쓰자^^^6,,,, 눈물 좔좔
-//                Log.i("useTime", useTime);
                 if (useTime != null) {
                     if (useTime.equals("10")) {
                         useTime = null;
@@ -400,7 +376,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         // 반복 정보 값: 기타 정보
         try {
             String RESULT = task3.execute().get();
-            Log.i("반복정보 전달 받은 값", RESULT);
 
             if (RESULT.length() != 0) {
                 detailInfo = RESULT.split("\n");
@@ -435,12 +410,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                 if (real_detailInfo != null) {
                     items.add(new Page2_1_X_RecyclerViewAdapter.Detail_item("기타 정보", DetailResult));
                 }
-
-//                if (real_detailInfo != null) {
-//                    for (int i = 0 ; i < detailInfo.length  ; i++) {
-//                        items.add(new Page2_1_X_RecyclerViewAdapter.Detail_item("기타 정보", infoName[i] + "\n" + infoText + "\n\n"));
-//                    }
-//                }
             }
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -451,14 +420,11 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         // 이미지 정보 값
         try {
             String RESULT = task4.execute().get();
-            Log.i("이미지 받은 값", RESULT);
 
             if (RESULT.length() != 0) {
                 detailImage = RESULT.split("\n");
                 for (int i = 0 ; i < detailImage.length ; i++) {
                     detailImage[i] = Url_front + detailImage[i];
-
-                    Log.i("잘 받아오니", detailImage[i]);
                 }
             }
         } catch (InterruptedException e) {
@@ -542,15 +508,11 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
     public String isClick(String countid) {
         mDbOpenHelper.open();
         Cursor iCursor = mDbOpenHelper.selectIdCulumns(countid);
-        Log.d("showDatabase", "DB Size: " + iCursor.getCount());
-
         while (iCursor.moveToNext()) {
             String userId = iCursor.getString(iCursor.getColumnIndex("userid"));
-
             id = userId;
         }
         mDbOpenHelper.close();
-
         return id;
     }
 
@@ -568,7 +530,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
             public void onClick(DialogInterface dialogInterface, int i) {
                 //관심관광지 페이지로 감
                 Intent intent = new Intent(getApplicationContext(), Page1_1_1.class);
-                //intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(intent);
             }
         });
@@ -590,7 +551,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d("시작", "시작");
 
             url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon?ServiceKey=" +
                     "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
@@ -610,7 +570,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                 boolean mapy = false;
 
                 xmlUrl = new URL(url);
-                Log.d("url", url);
                 xmlUrl.openConnection().getInputStream();
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 XmlPullParser parser = factory.newPullParser();
@@ -699,8 +658,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d("소개정보 시작", "시작2");
-
             url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailIntro?ServiceKey=" +
                     "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                     "&contentId=" + contentID +
@@ -785,13 +742,11 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                         case XmlPullParser.TEXT: {
                             // 12
                             if (restdate) {
-                                Log.i("restDate", "쉬는날" + restdate);
                                 Spanned tempRestDate = Html.fromHtml(parser.getText());
                                 returnResult += tempRestDate.toString() + "  ";
                                 restdate = false;
                             }
                             if (usetime) {
-                                Log.i("useTime", "개관시간" + parser.getText());
                                 Spanned useTime = Html.fromHtml(parser.getText());
                                 returnResult += useTime.toString() + "  ";
                                 usetime = false;
@@ -864,20 +819,12 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d("반복정보 시작", "시작3");
-
             url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?serviceKey=" +
                     "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                     "&numOfRows=10&pageNo=1" +
                     "&MobileOS=ETC&MobileApp=AppTest" +
                     "&contentId=" + contentID +
                     "&contentTypeId=" + contentTypeId;
-
-//            url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailInfo?serviceKey=" +
-//                    "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
-//                    "contentId=" + contentID +
-//                    "&contentTypeId=" + contentTypeId +
-//                    "&MobileOS=ETC&MobileApp=AppTest";
 
             URL xmlURL;
             returnResult = "";
@@ -888,7 +835,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                 boolean infotext = false;
 
                 xmlURL = new URL(url);
-                Log.d("url", url);
                 xmlURL.openConnection().getInputStream();
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 XmlPullParser parser = factory.newPullParser();
@@ -914,13 +860,11 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
                         case XmlPullParser.TEXT: {
                             if (infoname) {
-                                Log.i("infoname", "태그시작" + parser.getText());
                                 Spanned infoName = Html.fromHtml(parser.getText());
                                 returnResult += infoName.toString() + "  ";
                                 infoname = false;
                             }
                             if (infotext) {
-                                Log.i("restDate", "태그시작" + parser.getText());
                                 Spanned infoText = Html.fromHtml(parser.getText());
                                 returnResult += infoText.toString() + "\n";
                                 infotext = false;
@@ -953,8 +897,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
 
         @Override
         protected String doInBackground(String... strings) {
-            Log.d("이미지 정보 받아오기", "시작4");
-
             url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailImage?serviceKey=" +
                     "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                     "&MobileOS=ETC&MobileApp=AppTest" +
@@ -969,7 +911,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
                 boolean originimgurl = false;
 
                 xmlUrl = new URL(url);
-                Log.d("url", url);
                 xmlUrl.openConnection().getInputStream();
                 XmlPullParserFactory factory = XmlPullParserFactory.newInstance();
                 XmlPullParser parser = factory.newPullParser();
@@ -1032,7 +973,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
     protected void onPause() {
         super.onPause();
         ((ViewGroup)mapView.getParent()).removeView(mapView);
-        Log.i("onPause", "임마");
     }
 
 
@@ -1043,7 +983,6 @@ public class Page2_1_X extends AppCompatActivity implements OnItemClick {
         InputStream inputStream = null;
         try{
             inputStream = assetManager.open("station_code.txt");
-            //버퍼리더에 대한 설명 참고 : https://coding-factory.tistory.com/251
             BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
             String str = null;
             while (((str = reader.readLine()) != null)){ readStr += str + "\n";}

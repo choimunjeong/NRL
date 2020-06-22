@@ -63,6 +63,7 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
     ImageButton logo;
 
     //프로필 관련
@@ -177,10 +178,12 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -361,6 +364,15 @@ public class Page4_2 extends AppCompatActivity implements Page4_sendData {
             }
         });
         builder.show();
+    }
+
+    @Override
+    public void onBackPressed() {
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
     }
 }
 

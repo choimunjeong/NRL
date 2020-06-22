@@ -164,6 +164,7 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
 
     ImageButton logo;
 
@@ -345,10 +346,12 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -1473,5 +1476,14 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
         startActivity(getIntent());
     }
 
+
+    @Override
+    public void onBackPressed() {
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+        }
+    }
 }
 

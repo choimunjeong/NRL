@@ -3,9 +3,12 @@ package Page1;
 import android.content.Context;
 
 import Page2_1_1.OnItemClick;
+import Page2_1_X.Page2_1_X;
 
+import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,15 +21,13 @@ import com.nrr.hansol.spot_200510_hs.R;
 
 import java.util.List;
 
+import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
+
 public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_SecondAdapter.ViewHolder> {
     Context context;
     private String[] stay = new String[5];  // 하트의 클릭 여부
     private List<Page1_1_1.Recycler_item> items;  //리사이클러뷰 안에 들어갈 값 저장
     private OnItemClick mCallback;
-
-    private List<Page1_1_1.Recycler_item> real_items;   // 찐아이템
-
-
 
 
     public Page1_1_1_SecondAdapter(List<Page1_1_1.Recycler_item> items, OnItemClick mCallback) {
@@ -46,9 +47,10 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
         final Page1_1_1.Recycler_item item=items.get(position);
 
         holder.title.setText(items.get(position).title);
+        holder.type.setText(item.type);
+
         //이미지뷰에 url 이미지 넣기.
         Glide.with(context).load(item.getImage()).centerCrop().into(holder.imageView);
-        holder.type.setText(item.type);
 
         holder.heart.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -61,6 +63,21 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
             }
 
         });
+
+        holder.cardView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(context, Page2_1_X.class);
+                intent.putExtra("title", item.getTitle());
+                intent.putExtra("contentID", item.getContentviewID());
+                intent.putExtra("contenttypeid", (String) holder.type.getText());
+                intent.putExtra("image", item.getImage());
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -69,6 +86,7 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
+        CardView cardView;
         ImageView imageView;
         TextView type;
         TextView title;
@@ -76,6 +94,7 @@ public class Page1_1_1_SecondAdapter extends RecyclerView.Adapter<Page1_1_1_Seco
 
         public ViewHolder(View itemView) {
             super(itemView);
+            cardView = itemView.findViewById(R.id.page1_1_1_cardview);
             imageView = itemView.findViewById(R.id.no_image);
             type = itemView.findViewById(R.id.page1_1_1_cardview_type);
             title = itemView.findViewById(R.id.page1_1_1_cardview_title);

@@ -127,6 +127,7 @@ public class Page3_Main extends AppCompatActivity implements SharedPreferences.O
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
     NestedScrollView nestedScrollView;
 
 
@@ -304,10 +305,12 @@ public class Page3_Main extends AppCompatActivity implements SharedPreferences.O
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -1116,8 +1119,12 @@ public class Page3_Main extends AppCompatActivity implements SharedPreferences.O
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0,0);
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+        }
     }
 
 

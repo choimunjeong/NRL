@@ -64,6 +64,7 @@ public class Page1_1_0 extends AppCompatActivity implements SharedPreferences.On
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
 
     //위치서비스 관련
     private MyReceiver myReceiver;
@@ -256,10 +257,12 @@ public class Page1_1_0 extends AppCompatActivity implements SharedPreferences.On
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -290,8 +293,12 @@ public class Page1_1_0 extends AppCompatActivity implements SharedPreferences.On
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(0,0);
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(0, 0);
+        }
     }
 
     public void notity_listner(String sort){

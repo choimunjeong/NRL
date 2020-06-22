@@ -85,6 +85,7 @@ public class Page3_1_Main extends AppCompatActivity implements SharedPreferences
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
     ImageButton logo;
 
     //알고리즘
@@ -264,10 +265,12 @@ public class Page3_1_Main extends AppCompatActivity implements SharedPreferences
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -876,8 +879,12 @@ public class Page3_1_Main extends AppCompatActivity implements SharedPreferences
     //뒤로가기 버튼 누를때 생기는 화면전환 효과 없앰
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        overridePendingTransition(R.anim.backbutton, R.anim.backbutton);
+        if (EndDrawerToggle_open) {
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+            overridePendingTransition(R.anim.backbutton, R.anim.backbutton);
+        }
     }
 
     public void notity_listner(String sort){

@@ -83,6 +83,7 @@ public class Page1_full_Schedule extends AppCompatActivity implements SharedPref
     private Toolbar toolbar2;
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
+    private boolean EndDrawerToggle_open = false;
     ImageButton logo;
 
     //프로필 관련
@@ -259,10 +260,12 @@ public class Page1_full_Schedule extends AppCompatActivity implements SharedPref
             @Override //드로어가 열렸을때
             public void onDrawerOpened(View drawerView) {
                 super.onDrawerOpened(drawerView);
+                EndDrawerToggle_open = true;
             }
             @Override //드로어가 닫혔을때
             public void onDrawerClosed(View drawerView) {
                 super.onDrawerClosed(drawerView);
+                EndDrawerToggle_open = false;
             }
         };
 
@@ -590,12 +593,18 @@ public class Page1_full_Schedule extends AppCompatActivity implements SharedPref
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
-        if(past != null){
-            Intent intent = new Intent(Page1_full_Schedule.this, Page4_2.class);
-            intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
-            intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
-            startActivity(intent);
+        // 메뉴가 열려있으면 닫음
+        if(EndDrawerToggle_open){
+            drawer.closeDrawers();
+        } else {
+            super.onBackPressed();
+            if(past != null){
+                Intent intent = new Intent(Page1_full_Schedule.this, Page4_2.class);
+                intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+                intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+                startActivity(intent);
+            }
         }
+
     }
 }
