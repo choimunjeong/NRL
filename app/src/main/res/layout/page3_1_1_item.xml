@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:foreground="?selectableItemBackground"
+    android:background="@drawable/box_round"
+    android:layout_width="match_parent"
+    android:layout_height="63dp"
+    android:padding="16dp">
+
+
+        //리스트를 드래그 하게 해주는 작대기 3개
+        <RelativeLayout
+            android:id="@+id/page3_1_1_dragLine"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true">
+
+            <View
+                android:id="@+id/line1"
+                android:layout_width="23dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ic_line_11"/>
+
+            <View
+                android:id="@+id/line2"
+                android:layout_width="23dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ic_line_11"
+                android:layout_marginTop="7dp"/>
+
+            <View
+                android:id="@+id/line3"
+                android:layout_width="23dp"
+                android:layout_height="3dp"
+                android:background="@drawable/ic_line_11"
+                android:layout_marginTop="14dp"/>
+
+        </RelativeLayout>
+
+
+        //원과 순서 텍스트
+        <RelativeLayout
+            android:id="@+id/circle_layout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toRightOf="@+id/page3_1_1_dragLine"
+            android:layout_marginLeft="19dp"
+            android:layout_centerVertical="true">
+
+            <ImageView
+                android:id="@+id/page3_1_1_circle"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="@drawable/circle"/>
+
+            <TextView
+                android:id="@+id/page3_1_1_number"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="01"
+                android:textSize="14sp"
+                android:textColor="#ffffff"
+                android:fontFamily="@font/notosans"/>
+
+        </RelativeLayout>
+
+
+        //역 이름
+        <TextView
+            android:id="@+id/page3_1_1_name"
+            android:layout_width="130dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="13dp"
+            android:layout_toRightOf="@+id/circle_layout"
+            android:layout_centerVertical="true"
+            android:text="용산"
+            android:textSize="18sp"
+            android:textColor="#000000"
+            android:fontFamily="@font/gothic_medium"
+            android:scaleX="0.98"
+            android:includeFontPadding="false"/>
+
+
+        //삭제버튼
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/page3_1_1_delete_btn"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:text="삭제"
+            android:textSize="18sp"
+            android:textColor="#ffffff"
+            android:fontFamily="@font/gothic_medium"
+            android:background="@drawable/box_round4" />
+
+
+</RelativeLayout>
