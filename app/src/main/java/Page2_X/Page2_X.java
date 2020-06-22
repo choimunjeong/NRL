@@ -7,7 +7,9 @@ import android.content.Intent;
 import android.content.res.AssetManager;
 import android.os.Bundle;
 import android.os.Handler;
+import android.view.KeyEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.WebChromeClient;
@@ -16,6 +18,7 @@ import android.webkit.WebViewClient;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.AutoCompleteTextView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.nrr.hansol.spot_200510_hs.R;
@@ -62,6 +65,19 @@ public class Page2_X extends AppCompatActivity {
         final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchStation_page2);    //객체 연결
         autoCompleteTextView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list));   //아답터에 연결
 
+        //자동입력에서 키보드 검색을 눌렀을 때
+        autoCompleteTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if( actionId == EditorInfo.IME_ACTION_SEARCH){
+                    page2_svg.loadUrl("javascript:setMessage('" + autoCompleteTextView.getText().toString() + "')");
+                    handled = true;
+                }
+                return false;
+            }
+        });
+
         //자동입력에서 항목을 터치했을 때, 키보드가 바로 내려감 + 웹뷰에서 해당역에 출경도 버튼 띄워짐
         autoCompleteTextView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -69,10 +85,6 @@ public class Page2_X extends AppCompatActivity {
                 if (autoCompleteTextView.getText().toString() != null) {
                     page2_svg.loadUrl("javascript:setMessage('" + autoCompleteTextView.getText().toString() + "')");
                 }
-
-                //키보드 내림
-                InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-                mInputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
             }
         });
 
@@ -109,9 +121,6 @@ public class Page2_X extends AppCompatActivity {
         });
 
 
-        출처: https://osankkk.tistory.com/entry/WebView-컨트롤 [준영아빠]
-
-
 
         //자바스크립트에서 메시지 보내면, 그 값을 다음 액티비티로 전달
         page2_svg.addJavascriptInterface(new Object(){
@@ -127,7 +136,6 @@ public class Page2_X extends AppCompatActivity {
                         asyncDialog.setMessage(msg+"(으)로 이동중입니다..");
                         asyncDialog.show();
 
-                       // Toast.makeText(getApplicationContext(), msg, Toast.LENGTH_SHORT).show();
                         Intent intent = new Intent(Page2_X.this, Page2_X_Main.class);
                         intent.putExtra("st_name", msg);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);
@@ -147,10 +155,6 @@ public class Page2_X extends AppCompatActivity {
                     }});
             }
         }, "android");
-
-
-        //웹뷰 화면 비율
-        //page2_svg.setInitialScale(230);
     }
 
     //리스트에 검색될 단어를 추가한다. txt파일을 for문으로 쪼개서 넣음
@@ -180,8 +184,6 @@ public class Page2_X extends AppCompatActivity {
             name[i] = code_name[1];
 
             list.add(name[i]);
-
-
         }
     }
 

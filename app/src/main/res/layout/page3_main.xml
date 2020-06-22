@@ -334,7 +334,9 @@
                 android:drawablePadding="17.6dp"
                 android:hint="추가할 도시를 입력해 주세요"
                 android:fontFamily="@font/gothic_regular"
-                android:textSize="18dp"/>
+                android:textSize="18dp"
+                android:singleLine="true"
+                android:imeOptions="actionSearch"/>
         </FrameLayout>
 
 

@@ -20,8 +20,10 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.webkit.JavascriptInterface;
 import android.webkit.JsResult;
@@ -486,6 +488,23 @@ public class Page3_Main extends AppCompatActivity implements SharedPreferences.O
         final AutoCompleteTextView autoCompleteTextView = (AutoCompleteTextView) findViewById(R.id.searchStation_page3);    //객체 연결
         autoCompleteTextView.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, list));   //아답터에 연결
 
+        //자동입력에서 키보드 검색을 눌렀을 때
+        autoCompleteTextView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                boolean handled = false;
+                if( actionId == EditorInfo.IME_ACTION_SEARCH){
+                    page3_svg.loadUrl("javascript:setMessage('" + autoCompleteTextView.getText().toString() +"' , '0')");
+                    autoCompleteTextView.dismissDropDown();
+                    handled = true;
+
+                    //키보드 내림
+                    InputMethodManager mInputMethodManager = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+                    mInputMethodManager.hideSoftInputFromWindow(autoCompleteTextView.getWindowToken(), 0);
+                }
+                return false;
+            }
+        });
 
         //자동입력 누르면 스크롤이 맨 아래로 내려감
         autoCompleteTextView.setOnTouchListener(new View.OnTouchListener() {
