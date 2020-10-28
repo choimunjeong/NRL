@@ -89,7 +89,7 @@
     </style>
 
     <style name="recyclerview_number">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:textColor">#ffffff</item>
         <item name="android:letterSpacing" tools:targetApi="lollipop">-0.03</item>
         <item name="android:fontFamily">@font/notosans_semibold</item>
@@ -130,19 +130,19 @@
     </style>
 
     <style name="page2_1_x_moreText">888888888
-        <item name="android:textSize">18sp</item>
+        <item name="android:textSize">18dp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/notosans_bold</item>
     </style>
 
     <style name="cardview_subjectText2">
-        <item name="android:textSize">11sp</item>
+        <item name="android:textSize">11dp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:fontFamily">@font/gothic_medium</item>
     </style>
 
     <style name="cardview_titleText2">
-        <item name="android:textSize">16sp</item>
+        <item name="android:textSize">16dp</item>
         <item name="android:textColor">#000000</item>
         <item name="android:scaleX">0.98</item>
         <item name="android:fontFamily">@font/gothic_bold</item>
@@ -169,7 +169,7 @@
     </style>
 
     <style name="tab_text" parent="@android:style/TextAppearance.Widget.TabWidget">
-        <item name="android:textSize">15sp</item>
+        <item name="android:textSize">15dp</item>
         <item name="android:scaleX">0.95</item>
         <item name="android:fontFamily">@font/gothic_medium</item>
     </style>

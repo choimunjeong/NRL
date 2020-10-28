@@ -309,7 +309,7 @@ public class Page2_1_1_Fragment extends Fragment implements OnItemClick{
         @Override
         protected String doInBackground(String... strings) {
             if(sigunguCode.equals("0")){
-                url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
+                url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                         "&pageNo=1&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                         "&contentTypeId=" + contentTypeId +
@@ -319,7 +319,7 @@ public class Page2_1_1_Fragment extends Fragment implements OnItemClick{
                         "&listYN=Y" +
                         "&_type=json";
             } else {
-                url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
+                url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "7LT0Q7XeCAuzBmGUO7LmOnrkDGK2s7GZIJQdvdZ30lf7FmnTle%2BQoOqRKpjcohP14rouIrtag9KOoCZe%2BXuNxg%3D%3D" +
                         "&pageNo=1&numOfRows=5&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
                         "&contentTypeId=" + contentTypeId +

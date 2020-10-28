@@ -22,7 +22,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="T"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:textColor="#ffffff"
             android:fontFamily="@font/notosans"/>
 
@@ -42,7 +42,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="07:11~12:00"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:focusable="true"
             android:textColor="#000000"
             android:ellipsize="end"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:gravity="center_vertical"
             android:text="용산- 군산"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_medium"
             android:scaleX="0.98"/>

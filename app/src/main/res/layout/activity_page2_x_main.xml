@@ -50,7 +50,7 @@
                     android:layout_toRightOf="@+id/page2_x_back_btn"
                     android:layout_marginLeft="18dp"
                     android:text="#서울"
-                    android:textSize="26sp"
+                    android:textSize="26dp"
                     android:textColor="#4B4B4B"
                     android:fontFamily="@font/gothic_bold"
                     android:scaleX="0.98" />

@@ -23,7 +23,7 @@
         android:layout_toRightOf="@+id/add_btn"
         android:layout_marginLeft="20dp"
         android:text="도시 추가하기"
-        android:textSize="18sp"
+        android:textSize="18dp"
         android:textColor="#000000"
         android:fontFamily="@font/gothic_medium" />
 
