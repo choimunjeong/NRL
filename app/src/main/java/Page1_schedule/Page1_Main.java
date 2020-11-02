@@ -458,8 +458,10 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
         if(key != null){
             startDate = key;
         } else{
+            Log.d("엔드데이트", String.valueOf(db_data.size()));
             startDate = db_data.get(0).date;
             endDate = db_data.get(db_data.size()-1).date;
+
         }
 
 
@@ -1482,7 +1484,10 @@ public class Page1_Main extends AppCompatActivity implements   Page1_pagerAdapte
         if (EndDrawerToggle_open) {
             drawer.closeDrawers();
         } else {
-            super.onBackPressed();
+            Intent intent = new Intent(Page1_Main.this, Page1.class);
+            intent.addFlags(FLAG_ACTIVITY_CLEAR_TOP);
+            intent.addFlags(FLAG_ACTIVITY_NO_ANIMATION);
+            startActivity(intent);
         }
     }
 }

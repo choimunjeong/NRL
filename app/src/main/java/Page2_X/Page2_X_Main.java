@@ -308,6 +308,7 @@ public class Page2_X_Main extends AppCompatActivity implements Page2_X_Interface
         mapView = new MapView(this);
         mapView.setClickable(false);
         mapViewContainer.addView(mapView,0);
+        //java.lang.NullPointerException:
         mapView.setMapCenterPointAndZoomLevel(MapPoint.mapPointWithGeoCoord(y, x), 8, true);
         marker = new MapPOIItem();
 
@@ -749,7 +750,7 @@ public class Page2_X_Main extends AppCompatActivity implements Page2_X_Interface
         protected String doInBackground(String... strings) {
             //시군구코드가 0 일 때와 0이 아닐때를 구분해서 url을 넣어준다.
             if(sigunguCode.equals("0")){
-                url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
+                url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "tQVUU9RPcLsBmX4nqBFMUDqgvO3nBdfcZI%2FS8GQndON35%2BjzjShtdnH94CNN6d%2Fhb61uX1mOz7lWWD5rA6LNFg%3D%3D" +
                         "&pageNo=" + page +
                         "&numOfRows=10&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
@@ -762,7 +763,7 @@ public class Page2_X_Main extends AppCompatActivity implements Page2_X_Interface
                         "&listYN=Y" +
                         "&_type=json";
             } else {
-                url = "https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
+                url = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "tQVUU9RPcLsBmX4nqBFMUDqgvO3nBdfcZI%2FS8GQndON35%2BjzjShtdnH94CNN6d%2Fhb61uX1mOz7lWWD5rA6LNFg%3D%3D" +
                         "&pageNo=" + page +
                         "&numOfRows=10&MobileApp=AppTest&MobileOS=ETC&arrange=B" +
@@ -777,6 +778,7 @@ public class Page2_X_Main extends AppCompatActivity implements Page2_X_Interface
             }
             returnResult = "";
             URL xmlUrl;
+            Log.d("뭐냐! 뭐가 뭔제요", url);
 
             try {
                 xmlUrl = new URL(url);

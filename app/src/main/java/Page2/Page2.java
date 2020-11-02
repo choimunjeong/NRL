@@ -1030,7 +1030,7 @@ public class Page2 extends AppCompatActivity implements Page2_OnItemClick  ,  Sh
             URL url = null;
 
             try {
-                url = new URL("https://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
+                url = new URL("http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList?serviceKey=" +
                         "tQVUU9RPcLsBmX4nqBFMUDqgvO3nBdfcZI%2FS8GQndON35%2BjzjShtdnH94CNN6d%2Fhb61uX1mOz7lWWD5rA6LNFg%3D%3D" +
                         "&pageNo=" + page +
                         "&numOfRows=10&MobileApp=AppTest&MobileOS=ETC&arrange=B" +

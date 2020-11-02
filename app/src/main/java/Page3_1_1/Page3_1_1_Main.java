@@ -15,6 +15,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CompoundButton;
@@ -368,6 +369,7 @@ public class Page3_1_1_Main extends AppCompatActivity implements SharedPreferenc
             @Override
             public void onClick(View v) {
                 Page3_1_1_addBottomSheet add = Page3_1_1_addBottomSheet.getInstance();
+                add.getData(result_name);
                 add.show(getSupportFragmentManager(), "add");
             }
         });
