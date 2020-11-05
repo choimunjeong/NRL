@@ -19,7 +19,7 @@
             android:background="@drawable/ic_icon_place"
             android:layout_centerInParent="true"
             android:gravity="center"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:textColor="#ffffff"
             android:fontFamily="@font/notosans"/>
 
@@ -42,7 +42,7 @@
             android:clickable="true"
             android:focusable="true"
             android:text="(구미)정방사"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"
             android:ellipsize="end"
             android:fontFamily="@font/gothic_medium"

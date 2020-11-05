@@ -21,7 +21,7 @@
             android:layout_centerInParent="true"
             android:gravity="center"
             android:text="T"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:textColor="#ffffff"
             android:fontFamily="@font/notosans"/>
 
@@ -61,9 +61,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="    기차 시간 검색"
-            android:textAlignment="center"
+            android:gravity="center"
             android:layout_centerVertical="true"
-            android:textSize="14sp"
+            android:textSize="14dp"
             android:fontFamily="@font/gothic_medium"/>
 
         //기차시간검색 이미지
@@ -92,7 +92,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="용산"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_medium"
             android:scaleX="0.98"/>
@@ -103,7 +103,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text=" - "
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"/>
 
         //도시2
@@ -113,7 +113,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="용산"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_medium"
             android:scaleX="0.98"/>

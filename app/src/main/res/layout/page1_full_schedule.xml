@@ -77,7 +77,7 @@
             android:focusable="false"
             android:background="@null"
             android:text="전체 여행 스케쥴"
-            android:textSize="16sp"
+            android:textSize="16dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_medium"
             android:scaleX="0.98" />
@@ -91,7 +91,7 @@
             android:layout_marginLeft="16dp"
             android:layout_below="@+id/text3"
             android:text="2020년 1월 13일 ~ 1월 20일"
-            android:textSize="24sp"
+            android:textSize="24dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_bold"
             android:scaleX="0.98" />

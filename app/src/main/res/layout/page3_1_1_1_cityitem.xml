@@ -65,7 +65,7 @@
                 android:clickable="true"
                 android:focusable="true"
                 android:text="기차 시간 검색"
-                android:textSize="16sp"
+                android:textSize="16dp"
                 android:ellipsize="end"/>
 
         </RelativeLayout>

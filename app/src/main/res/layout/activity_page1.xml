@@ -38,7 +38,7 @@
         <RelativeLayout
             android:id="@+id/gotoschedule_layout"
             android:layout_width="match_parent"
-            android:layout_height="100dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/main_title"
             android:background="@drawable/box_white_rad10"
             android:layout_marginRight="16dp"
@@ -87,7 +87,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="내 여행"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:fontFamily="@font/gothic_bold"/>
 
@@ -97,7 +97,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@+id/text_mytrip"
                         android:text="D-14"
-                        android:textSize="18sp"
+                        android:textSize="18dp"
                         android:textColor="#000000"
                         android:fontFamily="@font/gothic_bold"
                         android:layout_marginLeft="5dp"/>

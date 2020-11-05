@@ -18,7 +18,7 @@
         android:layout_marginLeft="17dp"
         android:gravity="center_vertical"
         android:text="ddd"
-        android:textSize="17sp"
+        android:textSize="17dp"
         android:textColor="#563B12"
         android:fontFamily="@font/gothic_medium"
         android:scaleX="0.98"/>

@@ -20,7 +20,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:text="출발도시"
-            android:textSize="18sp"
+            android:textSize="18dp"
             android:textColor="#FE800D"
             android:fontFamily="@font/gothic_medium"
             android:scaleX="0.98"/>
@@ -40,7 +40,7 @@
                 android:layout_weight="5"
                 android:gravity="center"
                 android:text="출발"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="@font/gothic_medium"
                 android:scaleX="0.98" />
@@ -52,7 +52,7 @@
                 android:layout_weight="1"
                 android:gravity="center|center_vertical"
                 android:text="~"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="@font/gothic_medium" />
 
@@ -64,7 +64,7 @@
                 android:layout_weight="5"
                 android:text="도착"
                 android:gravity="center"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="@font/gothic_medium"
                 android:scaleX="0.98" />
@@ -90,7 +90,7 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:text="열차종류"
-                android:textSize="18sp"
+                android:textSize="18dp"
                 android:textColor="#000000"
                 android:fontFamily="@font/gothic_medium"
                 android:scaleX="0.98" />

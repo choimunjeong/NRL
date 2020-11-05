@@ -67,7 +67,7 @@
             android:layout_marginTop="2dp"
             android:layout_gravity="center_horizontal"
             android:text="용산"
-            android:textSize="32sp"
+            android:textSize="32dp"
             android:textColor="#000000"
             android:fontFamily="@font/gothic_bold"
             android:scaleX="0.98" />
@@ -82,7 +82,7 @@
             android:background="@drawable/btn_checkin"
             android:clickable="false"
             android:text="여행 예정역"
-            android:textSize="15sp"
+            android:textSize="15dp"
             android:textColor="#1B503D"
             android:elevation="3dp"
             android:fontFamily="@font/gothic_medium"
