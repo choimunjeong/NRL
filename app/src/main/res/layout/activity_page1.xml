@@ -285,56 +285,15 @@
                         android:layout_width="264dp"
                         android:layout_height="192dp"
                         android:background="@drawable/box_white_rad20"
+                        android:layout_marginRight="30dp"
                         android:elevation="3dp"
                         android:padding="16dp">
 
                         <TextView
-                            android:id="@+id/info_title"
+                            android:id="@+id/info_title1_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
-                            android:fontFamily="@font/gothic_medium"
-                            android:letterSpacing="-0.04"
-                            android:text="[내일로 이용 시간]"
-                            android:textColor="#4F4F4F"
-                            android:textScaleX="0.98"
-                            android:textSize="16dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/info_sub"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/info_title"
-                            android:layout_marginTop="6dp"
-                            android:fontFamily="@font/gothic_light"
-                            android:letterSpacing="-0.08"
-                            android:text="-운영기간: 2019.12.12(목)~2020.2.29(토)"
-                            android:textColor="#000000"
-                            android:textScaleX="0.98"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/info_sub2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_below="@+id/info_sub"
-                            android:layout_marginTop="4dp"
-                            android:fontFamily="@font/gothic_light"
-                            android:letterSpacing="-0.04"
-                            android:text="-사용 시작일 기준 3일 전부터 구매가능"
-                            android:textColor="#000000"
-                            android:textScaleX="0.98"
-                            android:textSize="13dp"
-                            android:textStyle="bold" />
-
-                        <TextView
-                            android:id="@+id/info_title2"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_above="@+id/info_sub3"
-                            android:layout_marginBottom="6dp"
                             android:fontFamily="@font/gothic_medium"
                             android:letterSpacing="-0.04"
                             android:text="[내일로 이용 대상]"
@@ -344,14 +303,42 @@
                             android:textStyle="bold" />
 
                         <TextView
-                            android:id="@+id/info_sub3"
+                            android:id="@+id/info_sub1_1"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_alignParentBottom="true"
-                            android:layout_marginBottom="8dp"
+                            android:layout_below="@+id/info_title1_1"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-전 국민 누구나"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_title1_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub1_1"
+                            android:layout_marginTop="15dp"
+                            android:fontFamily="@font/gothic_medium"
+                            android:letterSpacing="-0.04"
+                            android:text="[내일로 구매 기간]"
+                            android:textColor="#4F4F4F"
+                            android:textScaleX="0.98"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub1_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_title1_2"
+                            android:layout_marginTop="6dp"
                             android:fontFamily="@font/gothic_light"
                             android:letterSpacing="-0.04"
-                            android:text="-만32세 이하 내외국민"
+                            android:text="-이용시작일 기준 7일전부터 구매 가능"
                             android:textColor="#000000"
                             android:textScaleX="0.98"
                             android:textSize="13dp"
@@ -362,9 +349,155 @@
                         android:id="@+id/info2"
                         android:layout_width="264dp"
                         android:layout_height="192dp"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginRight="16dp"
+                        android:background="@drawable/box_white_rad20"
                         android:layout_toRightOf="@+id/info1"
+                        android:layout_marginRight="30dp"
+                        android:elevation="3dp"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/info_title2_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/gothic_medium"
+                            android:letterSpacing="-0.04"
+                            android:text="[내일로 이용 열차]"
+                            android:textColor="#4F4F4F"
+                            android:textScaleX="0.98"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub2_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_title2_1"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-KTX의 좌석, 일반열차(ITX-청춘, ITX-새마을, 새마을, 무궁화, 누리로, 통근열차)의 좌석·입석"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub2_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub2_1"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-코로나19 종료까지 일반열차의 입석 이용 불가"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub2_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub2_2"
+                            android:layout_marginTop="6dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-입석 이용 제한으로 좌석 매진 시 해당 열차 이용이 불가능하니 미리 구매 바람"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="13dp"
+                            android:textStyle="bold" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/info3"
+                        android:layout_width="264dp"
+                        android:layout_height="192dp"
+                        android:background="@drawable/box_white_rad20"
+                        android:layout_toRightOf="@+id/info2"
+                        android:layout_marginRight="30dp"
+                        android:elevation="3dp"
+                        android:padding="16dp">
+
+                        <TextView
+                            android:id="@+id/info_title3_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:fontFamily="@font/gothic_medium"
+                            android:letterSpacing="-0.04"
+                            android:text="[내일로 이용 기간]"
+                            android:textColor="#4F4F4F"
+                            android:textScaleX="0.98"
+                            android:textSize="16dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub3_1"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_title3_1"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-연중운영으로 이용 기간이 확대"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub3_2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub3_1"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-유효기간내에 3일을 직접 선택하여 패스를 사용하는 '선택 3일권' 신설"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub3_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub3_2"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-단, 한국철도가 지정한 명절 대수송기간 이용 불가"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+
+                        <TextView
+                            android:id="@+id/info_sub3_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/info_sub3_3"
+                            android:layout_marginTop="5dp"
+                            android:fontFamily="@font/gothic_light"
+                            android:letterSpacing="-0.08"
+                            android:text="-'만 25세이하 권종'은 하계, 동계만 운영하나, 개별 관광 활성화를 위해 2020년 한하여 연중운영"
+                            android:textColor="#000000"
+                            android:textScaleX="0.98"
+                            android:textSize="12dp"
+                            android:textStyle="bold" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:id="@+id/info4"
+                        android:layout_width="264dp"
+                        android:layout_height="192dp"
+                        android:layout_marginRight="16dp"
+                        android:layout_toRightOf="@+id/info3"
                         android:background="@drawable/box_white_rad20"
                         android:elevation="3dp"
                         android:padding="16dp">
@@ -372,7 +505,7 @@
                         // 내일로 이용 가격
 
                         <TextView
-                            android:id="@+id/info_title3"
+                            android:id="@+id/info_title4"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="8dp"
@@ -380,20 +513,20 @@
                             android:elevation="10dp"
                             android:fontFamily="@font/gothic_medium"
                             android:letterSpacing="-0.04"
-                            android:padding="10dp"
                             android:text="[내일로 이용 가격]"
                             android:textColor="#4F4F4F"
                             android:textScaleX="0.98"
                             android:textSize="16dp"
                             android:textStyle="bold" />
 
-                        // 가격표
 
+                        // 가격표
                         <TableLayout
                             android:id="@+id/table_layout"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:layout_below="@+id/info_title3"
+                            android:layout_below="@+id/info_title4"
+                            android:layout_marginTop="8dp"
                             android:background="#AAAAAA"
                             android:stretchColumns="*">
 
@@ -430,7 +563,7 @@
                                     android:gravity="center"
                                     android:letterSpacing="-0.04"
                                     android:padding="3dp"
-                                    android:text="3일권"
+                                    android:text="선택 3일권"
                                     android:textColor="#000000"
                                     android:textScaleX="0.98"
                                     android:textSize="11dp"
@@ -446,27 +579,12 @@
                                     android:gravity="center"
                                     android:letterSpacing="-0.04"
                                     android:padding="3dp"
-                                    android:text="5일권"
+                                    android:text="연속 7일권"
                                     android:textColor="#000000"
                                     android:textScaleX="0.98"
                                     android:textSize="11dp"
                                     android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="7일권"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
                             </TableRow>
 
                             <TableRow
@@ -483,7 +601,61 @@
                                     android:gravity="center"
                                     android:letterSpacing="-0.04"
                                     android:padding="3dp"
-                                    android:text="1인"
+                                    android:text="어른"
+                                    android:textColor="#000000"
+                                    android:textScaleX="0.98"
+                                    android:textSize="11dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginBottom="1dp"
+                                    android:background="#FFFFFF"
+                                    android:fontFamily="@font/gothic_light"
+                                    android:gravity="center"
+                                    android:letterSpacing="-0.04"
+                                    android:padding="3dp"
+                                    android:text="10만원"
+                                    android:textColor="#000000"
+                                    android:textScaleX="0.98"
+                                    android:textSize="11dp"
+                                    android:textStyle="bold" />
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginBottom="1dp"
+                                    android:background="#FFFFFF"
+                                    android:fontFamily="@font/gothic_light"
+                                    android:gravity="center"
+                                    android:letterSpacing="-0.04"
+                                    android:padding="3dp"
+                                    android:text="11만원"
+                                    android:textColor="#000000"
+                                    android:textScaleX="0.98"
+                                    android:textSize="11dp"
+                                    android:textStyle="bold" />
+
+                            </TableRow>
+
+                            <TableRow
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content">
+
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginLeft="1dp"
+                                    android:layout_marginBottom="1dp"
+                                    android:background="#FFFFFF"
+                                    android:fontFamily="@font/gothic_light"
+                                    android:gravity="center"
+                                    android:letterSpacing="-0.04"
+                                    android:padding="3dp"
+                                    android:text="만25세이하"
                                     android:textColor="#000000"
                                     android:textScaleX="0.98"
                                     android:textSize="11dp"
@@ -521,90 +693,6 @@
                                     android:textSize="11dp"
                                     android:textStyle="bold" />
 
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="7만원"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
-                            </TableRow>
-
-                            <TableRow
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content">
-
-                                <TextView
-                                    android:layout_width="match_parent"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="2인"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="9만원"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="11만원"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
-
-                                <TextView
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="wrap_content"
-                                    android:layout_marginLeft="1dp"
-                                    android:layout_marginBottom="1dp"
-                                    android:background="#FFFFFF"
-                                    android:fontFamily="@font/gothic_light"
-                                    android:gravity="center"
-                                    android:letterSpacing="-0.04"
-                                    android:padding="3dp"
-                                    android:text="13만원"
-                                    android:textColor="#000000"
-                                    android:textScaleX="0.98"
-                                    android:textSize="11dp"
-                                    android:textStyle="bold" />
                             </TableRow>
                         </TableLayout>
 
@@ -615,8 +703,8 @@
                             android:layout_marginTop="6dp"
                             android:fontFamily="@font/gothic_medium"
                             android:letterSpacing="-0.04"
-                            android:text="*자세한 사항은 내일로 홈페이지를 참고하세요"
-                            android:textColor="#000000"
+                            android:text="*자세한 사항은 내일로 홈페이지를 참고"
+                            android:textColor="#FF0000"
                             android:textScaleX="0.98"
                             android:textSize="11dp" />
                 </RelativeLayout>
