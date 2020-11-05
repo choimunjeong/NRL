@@ -27,7 +27,7 @@ import Page2_1_X.Page2_1_X;
 import static android.content.Intent.FLAG_ACTIVITY_CLEAR_TOP;
 
 public class Page2_X_Adapter extends RecyclerView.Adapter<Page2_X_Adapter.ViewHolder> {
-    private String[] stay = new String[100];  // 하트의 클릭 여부
+    private String[] stay = new String[10000];  // 하트의 클릭 여부
 
 
     private Context context;

@@ -57,7 +57,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
-import com.nrr.hansol.spot_200510_hs.BuildConfig;
+
+import com.airbnb.lottie.BuildConfig;
 import com.nrr.hansol.spot_200510_hs.Page0_9_PopUp;
 import com.nrr.hansol.spot_200510_hs.R;
 import com.google.android.material.snackbar.Snackbar;
