@@ -14,6 +14,7 @@ import android.widget.AdapterView;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -31,6 +32,8 @@ import java.util.List;
 public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
     Page3_1_1_Main page3_1_1_main;
     onSetList listener;                             //page3_1_1에 값을 전달하기 위한 인터페이스
+    ArrayList<String> result_name = new ArrayList<String>();
+    ArrayList<String> noStation_name = new ArrayList<String>();
 
     private ListView listView;                      // 검색을 보여줄 리스트변수
     private EditText editSearch;                    // 검색어를 입력할 Input 창
@@ -52,6 +55,9 @@ public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
         return new Page3_1_1_addBottomSheet();
     }
 
+    public void getData(ArrayList<String> result_name){
+        this.result_name = result_name;
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -85,6 +91,7 @@ public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
 
         //리스트를 생성한다.
         datalist = new ArrayList<String>();
+        noStation();
 
         //검색에 사용할 데이터를 미리 저장한다.
         settingList();
@@ -144,14 +151,27 @@ public class Page3_1_1_addBottomSheet extends BottomSheetDialogFragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if(listener != null){
-                    listener.onsetlist(datalist.get(position));
+                    if(result_name.contains(datalist.get(position))){
+                        Toast.makeText(getContext(), "도시를 중복선택 할 수 없습니다.\n 다른 도시를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    }else if(noStation_name.contains(datalist.get(position))){
+                        Toast.makeText(getContext(), "해당 도시는 서비스 준비중입니다. \n 다른 도시를 선택해주세요.", Toast.LENGTH_SHORT).show();
+                    } else{
+                        listener.onsetlist(datalist.get(position));
+                    }
                 }
-                 dismiss();
             }
         });
         return rootview;
     }
 
+    public void noStation(){
+        noStation_name.add("횡성");
+        noStation_name.add("둔내");
+        noStation_name.add("평창");
+        noStation_name.add("진부");
+        noStation_name.add("삼척해변");
+        noStation_name.add("추암");
+    }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {

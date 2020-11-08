@@ -368,6 +368,7 @@ public class Page3_1_1_Main extends AppCompatActivity implements SharedPreferenc
             @Override
             public void onClick(View v) {
                 Page3_1_1_addBottomSheet add = Page3_1_1_addBottomSheet.getInstance();
+                add.getData(result_name);
                 add.show(getSupportFragmentManager(), "add");
             }
         });
