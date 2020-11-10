@@ -8,6 +8,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.IntentSender;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.database.Cursor;
@@ -55,6 +56,13 @@ import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.play.core.appupdate.AppUpdateInfo;
+import com.google.android.play.core.appupdate.AppUpdateManager;
+import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
+import com.google.android.play.core.install.model.AppUpdateType;
+import com.google.android.play.core.install.model.UpdateAvailability;
+import com.google.android.play.core.tasks.OnSuccessListener;
+import com.google.android.play.core.tasks.Task;
 import com.nrr.hansol.spot_200510_hs.Page0;
 import com.nrr.hansol.spot_200510_hs.Page0_9_PopUp;
 import com.nrr.hansol.spot_200510_hs.R;
@@ -107,6 +115,10 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
     private DrawerLayout drawer;
     private EndDrawerToggle mDrawerToggle;
     private boolean EndDrawerToggle_open = false;
+
+    // 인앱 업데이트 관련
+    private final int MY_REQUEST_CODE = 100;
+    private AppUpdateManager mAppUpdateManager;
 
     //위치서비스 관련
     private MyReceiver myReceiver;
@@ -240,6 +252,9 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
 
         showDatabase(sort);
         showLikeDB();
+
+        // 인앱업데이트
+        initInAppUpdate();
 
         mDrawerToggle = new EndDrawerToggle(this,drawer,toolbar2,R.string.open_drawer,R.string.close_drawer){
             @Override //드로어가 열렸을때
@@ -752,8 +767,6 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
 
     }
 
-
-
     @Override
     public void onClick(View view) {
 
@@ -886,6 +899,44 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
 
     }
 
+    // 인 앱 업데이트
+    public void initInAppUpdate() {
+        // 업데이트 매니저 초기화
+        mAppUpdateManager= AppUpdateManagerFactory.create(getApplicationContext());
+
+        // 업데이트 사용 가능 상태인지 체크
+        Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+
+        // 사용 가능 리스너 달아주기
+        appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                        && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {   // 허용된 타입의 업데이트라면 실행
+
+                    // 업데이트 가능한 상태
+                    requestUpdate(appUpdateInfo);
+                }
+            }
+        });
+    }
+
+    private void requestUpdate(AppUpdateInfo appUpdateInfo) {
+        try {
+            mAppUpdateManager.startUpdateFlowForResult(
+                    appUpdateInfo,  // 받아온 업데이트 인포
+                    // 'AppUpdateType.FLEXIBLE': 사용자에게 업데이트 여부를 물은 후 업데이트 실행 가능
+                    // 'AppUpdateType.IMMEDIATE': 사용자가 수락해야만 하는 업데이트 창을 보여줌
+                    AppUpdateType.IMMEDIATE,
+                    Page1.this, // 업데이트 요청 받은 액티비티
+                    MY_REQUEST_CODE   //// onActivityResult 에서 사용될 REQUEST_CODE
+            );
+        } catch (IntentSender.SendIntentException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -894,6 +945,32 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
                 String result = data.getStringExtra("result");
                 menu_text2.setText(result);
                 nickName = result;
+            }
+        }
+
+        // 인 앱 업데이트
+        if (resultCode == MY_REQUEST_CODE) {
+            Toast toast = Toast.makeText(this.getApplicationContext(), "MY_REQUEST_CODE", Toast.LENGTH_SHORT);
+            toast.show();
+
+            // 업데이트가 정상적으로 끝나지 않았을 경우
+            if (resultCode != RESULT_OK) {
+                Log.d("AppUpdate", "Update flow failed! Result code: " + resultCode);
+                // 업데이트가 취소되거나 실패하면 업데이트를 다시 요청할 수 있다.,
+                // 업데이트 타입을 선택한다 (IMMEDIATE || FLEXIBLE).
+                Task<AppUpdateInfo> appUpdateInfoTask = mAppUpdateManager.getAppUpdateInfo();
+
+                appUpdateInfoTask.addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+                    @Override
+                    public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                        if (appUpdateInfo.updateAvailability() == UpdateAvailability.UPDATE_AVAILABLE
+                                // flexible한 업데이트를 위해서는 AppUpdateType.FLEXIBLE을 사용한다.
+                                && appUpdateInfo.isUpdateTypeAllowed(AppUpdateType.IMMEDIATE)) {
+                            // 업데이트를 다시 요청한다.
+                            requestUpdate(appUpdateInfo);
+                        }
+                    }
+                });
             }
         }
     }
@@ -963,8 +1040,22 @@ public class Page1 extends AppCompatActivity implements View.OnClickListener, Sh
     protected void onResume() {
         super.onResume();
         LocalBroadcastManager.getInstance(this).registerReceiver(myReceiver, new IntentFilter(LocationUpdatesService.ACTION_BROADCAST));
-    }
 
+        // 업데이트 도중 업데이트 중 앱을 멈췄다가 다시 실행했을 때 멈추진 않는지 확인
+        mAppUpdateManager.getAppUpdateInfo().addOnSuccessListener(new OnSuccessListener<AppUpdateInfo>() {
+            @Override
+            public void onSuccess(AppUpdateInfo appUpdateInfo) {
+                if (appUpdateInfo.updateAvailability() == UpdateAvailability.DEVELOPER_TRIGGERED_UPDATE_IN_PROGRESS) {
+                    // 업데이트가 진행중이라면 계속 실행
+                    try {
+                        mAppUpdateManager.startUpdateFlowForResult(appUpdateInfo, AppUpdateType.IMMEDIATE, Page1.this, MY_REQUEST_CODE);
+                    } catch (IntentSender.SendIntentException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        });
+    }
 
 
     @Override
