@@ -61,7 +61,7 @@
 
 - 메인페이지
 > 파악한 취향을 바탕으로 **카테고리와 관광지를 추천**합니다.
-<img width="400" alt="2" src="https://user-images.githubusercontent.com/42430547/107773334-d7481900-6d80-11eb-8d96-c6739fcb104c.png">    
+<img width="350" alt="2" src="https://user-images.githubusercontent.com/42430547/107773334-d7481900-6d80-11eb-8d96-c6739fcb104c.png">    
 <br/>
 
 - 카테고리로 관광지 탐색하기
@@ -77,18 +77,17 @@
 
 - 여행 스케줄 짜기
 > 가장 최소한의 **정보를 순차적으로** 받습니다. **SVG**지도를 확대하여 각 역을 터치하여 확인 할 수 있습니다. 역명으로 검색 할 수도 있습니다.
-<img width="250" alt="4" src="https://user-images.githubusercontent.com/42430547/107774094-e7acc380-6d81-11eb-856e-ddd6012b278f.png">      
+<img width="200" alt="4" src="https://user-images.githubusercontent.com/42430547/107774094-e7acc380-6d81-11eb-856e-ddd6012b278f.png">      
 <br/>
 
 - 최단 경로 확인하기
 > **다익스트라 알고리즘**으로 최단 경로를 제공합니다.
-<img width="250" alt="4" src="https://user-images.githubusercontent.com/42430547/107774094-e7acc380-6d81-11eb-856e-ddd6012b278f.png">      
+<img width="400" alt="44" src="https://user-images.githubusercontent.com/42430547/107774719-b54f9600-6d82-11eb-9c56-5964eb5ba7b3.png">      
 <br/>
 
 - 등록한 여행 스케줄 확인 
 > 공공데이터 포털에서 제공하는 열차 시간 API를 사용하여 신뢰할 수 있는 정보를 제공합니다. 
-<p align="center">
-<img width="675" alt="5" src="https://user-images.githubusercontent.com/42430547/106128491-c86b3f00-61a2-11eb-94f9-f5311a1793a1.png">     </p>
+<img width="600" alt="5" src="https://user-images.githubusercontent.com/42430547/107774408-4bcf8780-6d82-11eb-8fcc-e210d5efc71a.png">     
 <br/>
 
 <br/><br/> 
