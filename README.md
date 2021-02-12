@@ -48,8 +48,8 @@
 <img width="700" alt="1" src="https://user-images.githubusercontent.com/42430547/107768237-7ec14d80-6d79-11eb-9888-dc9f812226c6.png">   </p> 
 <br/><br/>    
 
-## <a name="video">시연 영상</a>    
-[![Watch the video](https://user-images.githubusercontent.com/42430547/107765877-f1302e80-6d75-11eb-9fe1-3e88c2747ec7.png)](https://youtu.be/SOMHYKLHeo4)        
+## <a name="video">시연 영상</a>   
+[![Watch the video](https://user-images.githubusercontent.com/42430547/107774898-f5af1400-6d82-11eb-960e-06514a547585.png)](https://youtu.be/SOMHYKLHeo4)       
 <br/><br/>
 
 ## <a name="screen">핵심기능&스크린 샷</a>    
@@ -77,12 +77,12 @@
 
 - 여행 스케줄 짜기
 > 가장 최소한의 **정보를 순차적으로** 받습니다. **SVG**지도를 확대하여 각 역을 터치하여 확인 할 수 있습니다. 역명으로 검색 할 수도 있습니다.
-<img width="200" alt="4" src="https://user-images.githubusercontent.com/42430547/107774094-e7acc380-6d81-11eb-856e-ddd6012b278f.png">      
+<img width="170" alt="4" src="https://user-images.githubusercontent.com/42430547/107774094-e7acc380-6d81-11eb-856e-ddd6012b278f.png">      
 <br/>
 
 - 최단 경로 확인하기
 > **다익스트라 알고리즘**으로 최단 경로를 제공합니다.
-<img width="400" alt="44" src="https://user-images.githubusercontent.com/42430547/107774719-b54f9600-6d82-11eb-9c56-5964eb5ba7b3.png">      
+<img width="330" alt="44" src="https://user-images.githubusercontent.com/42430547/107774719-b54f9600-6d82-11eb-9c56-5964eb5ba7b3.png">      
 <br/>
 
 - 등록한 여행 스케줄 확인 
